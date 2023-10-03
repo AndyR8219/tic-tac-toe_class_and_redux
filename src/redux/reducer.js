@@ -8,14 +8,17 @@ export const initialState = {
   draw: false,
 }
 
-export const rootReducer = (state = initialState, action) => {
-  const { type, payload } = action
+export const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'MOVE_PLAYER': {
-      return { ...state, player: payload }
+      return {
+        ...state,
+        player: payload.currentPlayer,
+        cellsArray: payload.currentSquares,
+      }
     }
     case 'START_NEW_GAME': {
-      return { ...initialState, cellsArray: createEmptyArray() }
+      return initialState
     }
     case 'WINNER': {
       return {

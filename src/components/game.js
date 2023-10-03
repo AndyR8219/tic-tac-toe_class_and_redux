@@ -8,14 +8,14 @@ import './game.css'
 class Game extends Component {
   handleClick = (index) => {
     let currentPlayer
-    let currentSquares = this.props.cellsArray
+    let currentSquares = [...this.props.cellsArray]
     if (currentSquares[index] === null && !winner(currentSquares)) {
       currentSquares[index] = this.props.player ? PLAYER.CROSS : PLAYER.NOUGHT
       currentPlayer = !this.props.player
     } else {
       return
     }
-    this.props.movePlayer(currentPlayer)
+    this.props.movePlayer({ currentPlayer, currentSquares })
 
     if (winner(currentSquares)) {
       this.props.playerWin(this.props.player)
